@@ -12,6 +12,8 @@ namespace Ecomm_project.DataAcess.Repository.IRepository
         ICoverTypeRepository CoverType { get; }
         ISpcalls Spcalls { get; }
         IProductRep ProductRep { get; }
-        void Save();
+        IApplicationUserRepository ApplicationUser { get; }
+        ICompanyRepository Company { get; }
+    void Save();
     }
 }

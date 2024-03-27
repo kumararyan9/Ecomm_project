@@ -20,5 +20,11 @@ namespace Ecomm_Projects.Utilities
         public const string Proc_DeleteCategory = "DeleteCategory";
         public const string Proc_getCategory = "GetCategory";
         public const string Proc_getCategorys = "GetCategories";
+
+        //roles
+        public const string Role_Admin = "Admin";
+        public const string Role_Employee = "Employee User";
+        public const string Role_Company = "Company User";
+        public const string Role_Individual = "Individual User";
     }
 }

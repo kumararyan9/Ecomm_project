@@ -18,6 +18,8 @@ namespace Ecomm_project.DataAcess.Repository
             CoverType = new CoverTypeRepository(_context);
             Spcalls = new Spcalls(_context);
             ProductRep = new ProductRep(_context);
+            Company=new CompanyRepository(_context);
+            ApplicationUser= new ApplicationUserRepository(_context);
         }
 
         public ICategoryRepository Category { private set; get; }
@@ -27,6 +29,8 @@ namespace Ecomm_project.DataAcess.Repository
         public ISpcalls Spcalls { private set; get; }
 
         public IProductRep ProductRep { private set; get; }
+        public IApplicationUserRepository ApplicationUser { private set; get; }
+        public ICompanyRepository Company { private set; get; }
 
         public void Save()
         {

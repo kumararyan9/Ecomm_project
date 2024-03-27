@@ -1,0 +1,115 @@
+﻿@model Ecomm_project.Models.ViewModel.ProductVm
+@{
+    ViewData["Title"] = "Credit";
+    var title = Model.Product.Id != 0 ? "Edit Product" : "Add Product";
+}
+
+<h2 class="text-center text-bg-secondary text-white">|| @title ||</h2>
+<div class="row p-2 m-2">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.Product.Id!=0)
+            {
+                <input type="hidden" asp-for="Product.Id"/>
+            }
+            <div class="form-group p-2">
+                <label asp-for="Product.Title"></label>
+                <input asp-for="Product.Title" class="form-control" />
+                <span asp-validation-for="Product.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Product.Author"></label>
+                <input asp-for="Product.Author" class="form-control" />
+                <span asp-validation-for="Product.Author" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Product.Description"></label>
+                <textarea asp-for="Product.Description" rows="3" class="form-control"></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Product.ISBN"></label>
+                <input asp-for="Product.ISBN" class="form-control" />
+                <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Product.ListPrice"></label>
+                <input asp-for="Product.ListPrice" class="form-control" />
+                <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Product.Price"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Product.Price50"></label>
+                <input asp-for="Product.Price50" class="form-control" />
+                <span asp-validation-for="Product.Price50" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Product.Price100"></label>
+                <input asp-for="Product.Price100" class="form-control" />
+                <span asp-validation-for="Product.Price100" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Product.ImageUrl"></label>
+                <input type="file" id="uploadFile" name="files" class="form-control" />
+                @*<span asp-validation-for="Product.Title" class="text-danger"></span>*@
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Product.CategoryId"></label>
+                @Html.DropDownListFor(m=>m.Product.CategoryId,Model.CategoryList,"Select CAtegory",new{@class="form-control"})
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+              <label asp-for="Product.CoverTypeId"></label>
+              @Html.DropDownListFor(m=>m.Product.CoverTypeId,Model.CoverTypeList,"Select CoverType",new{@class="form-control"})
+              <span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                @if (Model.Product.Id != 0)
+                {
+                    <partial name="_EditBacktolist" />
+                }
+                else
+                {
+                    <div class="row">
+                       <div class="col">
+                            <button type="submit" class="btn btn-info form-control" onclick="return Valdata()">
+                               Save
+                           </button>
+                       </div>
+                       <div class="col">
+                           <a class="btn btn-danger form-control" asp-action="Index">
+                               Back To List
+                           </a>
+                       </div>
+                    </div>
+                }
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <p class="text-danger text-center">Image!</p>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/ne2gvt6wosycl0kuf5clobb4b1lmrluikc2iphrn6qn4dp7i/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: "textarea",
+            plugins: "lists",
+            menubar: "file edit format"
+        })
+        function Valdata() {
+            if (document.getElementById('uploadFile').value == "") {
+                swal("error", "Please Select Image !!!", "error");
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
